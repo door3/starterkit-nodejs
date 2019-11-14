@@ -7,6 +7,9 @@ WORKDIR /usr/app
 COPY ./app/package*.json ./
 RUN npm install
 
+EXPOSE 3000
+EXPOSE 9229
+
 # Copy source code and run
 COPY ./app ./
 CMD [ "npm", "run", "start:debug:docker" ]

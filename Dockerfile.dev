@@ -7,6 +7,8 @@ WORKDIR /usr/app
 COPY ./app/package*.json ./
 RUN npm install
 
+EXPOSE 3000
+
 # Copy source code and run
 COPY ./app ./
 CMD [ "npm", "start" ]
