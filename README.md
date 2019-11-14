@@ -1,5 +1,9 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://door3.com/" target="blank">
+    <img src="https://www.door3.com/sites/all/themes/custom/door3/logo.png" />
+  </a>
+  <br/>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="160" alt="Nest Logo" /></a>
 </p>
 
 [travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
@@ -31,6 +35,29 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+## Running in a container
+```bash
+# building dev container
+$ docker build -t door3/starter-nodejs -f Dockerfile.dev .
+
+# running dev container
+$ docker run -p 3000:3000 door3/starter-nodejs
+
+# building debug container
+$ docker build -t door3/starter-nodejs:debug -f Dockerfile.debug .
+
+#running debug container
+$ docker run -p 3000:3000 -p 9229:9229 door3/starter-nodejs:debug
+```
+
+Once the debug container is running you can launch the debugger from either Chrome or VSCode.
+
+__Chrome:__
+navigate to [chrome://inspect](chrome://inspect) and click `inspect` under REMOTE TARGET.
+
+__VSCode:__
+Click the debug panel and select `Docker: Attach to Node` config and then click run.
 
 ## Test
 

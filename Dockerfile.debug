@@ -1,0 +1,15 @@
+FROM node:12.13-alpine
+
+# Set working directory
+WORKDIR /usr/app
+
+# Install dependencies
+COPY ./app/package*.json ./
+RUN npm install
+
+EXPOSE 3000
+EXPOSE 9229
+
+# Copy source code and run
+COPY ./app ./
+CMD [ "npm", "run", "start:debug:docker" ]

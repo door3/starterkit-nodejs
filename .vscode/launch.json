@@ -1,0 +1,44 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Local: Attach to Node",
+      "port": 9229,
+      "cwd": "${workspaceFolder}/app",
+      "args": [
+        "${workspaceFolder}/app/src/main.ts"
+      ],
+      "runtimeArgs": [
+          "--inspect-brk=0.0.0.0",
+          "-r",
+          "ts-node/register",
+          "-r",
+          "tsconfig-paths/register"
+      ],
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Docker: Attach to Node",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "preLaunchTask": "build-task",
+      "localRoot": "${workspaceFolder}/app",
+      "remoteRoot": "/usr/app",
+      "protocol": "inspector",
+      "restart": true,
+      "sourceMapPathOverrides":{
+        "usr/app/*": "${workspaceFolder}/app/*",
+      }
+    }
+  ]
+}
