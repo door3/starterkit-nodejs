@@ -23,6 +23,13 @@
 $ npm install
 ```
 
+## Configuration
+
+The application accepts environment variables. You can pass enviroment variables directly or via `.env` file. (__DO NOT CHECK .env FILES INTO SOURCE CONTROL__)
+Environment variables are provided to the app via the `ConfigService` located at `app/src/common/services/config.service.ts`.
+
+Environment variables are grouped via config providers, such as the `AppConfigProvider` and `DBConfigProvider` class. Additional providers may added as necessary. The application should avoid using `process.env` directly.
+
 ## Running the app
 
 ```bash
