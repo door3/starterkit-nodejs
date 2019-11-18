@@ -4,6 +4,7 @@ import { IConfig, IConfigProvider } from './interfaces';
 export interface IAppConfig extends IConfig {
   nodeEnv: string;
   port: number;
+  name: string;
 }
 
 export class AppConfigProvider implements IConfigProvider {
@@ -15,6 +16,7 @@ export class AppConfigProvider implements IConfigProvider {
     const { error, value: config } = this.schema().validate({
       nodeEnv: process.env.NODE_ENV || 'development',
       port: Number.parseInt(process.env.PORT, 10) || 3000,
+      name: process.env.APP_NAME || 'starter-kit',
     });
 
     if (error) {
@@ -32,6 +34,7 @@ export class AppConfigProvider implements IConfigProvider {
     return Joi.object({
       nodeEnv: Joi.string().valid('development', 'production', 'test', 'stage').default('development'),
       port: Joi.number().default(3000),
+      name: Joi.string(),
     });
   }
 
