@@ -12,8 +12,8 @@ export class LogService implements ILogger {
   private readonly requestContext: string;
 
   constructor(
-    private readonly config: ConfigService,
-    @Inject(REQUEST) private readonly request: IRequest,
+    config: ConfigService,
+    @Inject(REQUEST) private readonly request?: IRequest,
     ) {
 
     if (request && request.identifier) {

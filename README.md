@@ -30,7 +30,7 @@ Environment variables are provided to the app via the `ConfigService` located at
 
 Environment variables are grouped via config providers, such as the `AppConfigProvider` and `DBConfigProvider` class. Additional providers may added as necessary. The application should avoid using `process.env` directly.
 
-## Running the app
+## Running the app locally
 
 ```bash
 # development
@@ -43,21 +43,27 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Debugging locally
+To debug the application locally you can use one of two methods.
+
+__VSCode__
+* Click the debug panel and select `Local: Attach to Node` config and then click run.
+
+__Chrome__
+
+1) run `npm run start:debug`
+2) navigate to [chrome://inspect](chrome://inspect) and click `inspect` under REMOTE TARGET.
+
 ## Running in a container
 ```bash
 # building dev container
-$ docker build -t door3/starter-nodejs -f Dockerfile.dev .
-
-# running dev container
-$ docker run -p 3000:3000 door3/starter-nodejs
+$ docker-compose -f ./docker-compose.dev.yml up --build
 
 # building debug container
-$ docker build -t door3/starter-nodejs:debug -f Dockerfile.debug .
-
-#running debug container
-$ docker run -p 3000:3000 -p 9229:9229 door3/starter-nodejs:debug
+$ docker-compose -f ./docker-compose.debug.yml up --build
 ```
 
+## Debugging in a container
 Once the debug container is running you can launch the debugger from either Chrome or VSCode.
 
 __Chrome:__
@@ -65,6 +71,41 @@ navigate to [chrome://inspect](chrome://inspect) and click `inspect` under REMOT
 
 __VSCode:__
 Click the debug panel and select `Docker: Attach to Node` config and then click run.
+
+## Databases in a container
+
+This starter project comes pre-configured with three databases:
+* postgres
+* mysql
+* mssql
+
+### Connecting to databases
+
+Once you have the containers up, run the following command to choose the database you wish to connect to.
+```bash
+$ docker-compose -f docker-compose.dev.yml ps
+```
+Using the Name of the container output above, connect using the appropriate command listed below:
+
+__Postgresql__
+```bash
+$ docker exec -it [NAME] psql -U admin development
+```
+
+__MySQL__
+```bash
+$ docker exec -it [NAME] mysql -u root -p development
+```
+
+__MSSQL__
+```bash
+$ docker exec -it [NAME] /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "[SA_PASSWORD]"
+```
+<pre>
+NOTE:
+MSSQL on Mac may error out due to permissions issues on the mounted volume <b>mssql-vol</b>.
+To fix this see this article: <a href="http://www.centinosystems.com/blog/tag/containers/">Start a 2019 non-root Container</a>.
+</pre>
 
 ## Test
 

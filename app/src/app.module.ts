@@ -4,15 +4,14 @@ import { AppService } from './common/services/app.service';
 import { ConfigService } from './common/services/config.service';
 import { LogService } from './common/services/log.service';
 import { LoggerMiddleware } from './common/middleware/logging';
-import { requestContext } from './common/middleware/requestContext';
 
 @Module({
   imports: [],
   controllers: [AppController],
   providers: [
-    AppService,
-    ConfigService,
     LogService,
+    ConfigService,
+    AppService,
   ],
 })
 export class AppModule implements NestModule {

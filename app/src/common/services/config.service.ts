@@ -1,11 +1,11 @@
 import * as dotenv from 'dotenv';
-import { Scope, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { AppConfigProvider } from '../config/AppConfig.provider';
 import { DBConfigProvider } from '../config/DBConfig.provider';
 import { LogConfigProvider } from '../config/LogConfig.provider';
 
-@Injectable({ scope: Scope.DEFAULT })
+@Injectable()
 export class ConfigService {
   private readonly appConfig: AppConfigProvider;
   private readonly dbConfig: DBConfigProvider;

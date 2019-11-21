@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # ENV Variables
 .env*
+
+# Database volumes
+/database/**/data/*
