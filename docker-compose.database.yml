@@ -11,14 +11,12 @@ services:
     environment:
       - POSTGRES_DB=development
       - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=adminpassword
 
   mysqldb:
     image: mysql:8
     volumes:
       - ./database/mysql/data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
     ports:
       - "3306:3306"
     environment:
@@ -36,23 +34,6 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=p@ssword12345
-
-  app:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.dev
-    ports:
-      - "3000:3000"
-    environment:
-      - DB1_HOST=postgresdb
-      - DB1_TYPE=postgres
-      - DB1_DATABASE=development
-      - DB1_PORT=5432
-      - DB1_PASSWORD=adminpassword
-    depends_on:
-      - postgresdb
-      - mysqldb
-      - mssqldb
 
 volumes:
   mssql-vol:

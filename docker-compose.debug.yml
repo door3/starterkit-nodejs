@@ -21,9 +21,9 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_DATABASE=development
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=adminpassword
 
   mssqldb:
     image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
@@ -42,6 +42,17 @@ services:
     ports:
       - "3000:3000"
       - "9229:9229"
+    environment:
+      - ENV_DIR=./dist
+      - DB1_HOST=postgresdb
+      - DB1_TYPE=postgres
+      - DB1_DATABASE=development
+      - DB1_PORT=5432
+      - DB1_PASSWORD=adminpassword
+    depends_on:
+      - postgresdb
+      - mysqldb
+      - mssqldb
 
 volumes:
   mssql-vol:
