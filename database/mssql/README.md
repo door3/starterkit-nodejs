@@ -69,7 +69,7 @@ GO
 USE [db_name]
 CREATE USER [user_name] FOR LOGIN [login_name];
 GO
-ALTER ROLE dbo_owner ADD MEMBER [user_name];
+ALTER ROLE db_owner ADD MEMBER [user_name];
 GO
 ```
 
