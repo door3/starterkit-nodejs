@@ -5,6 +5,7 @@ export interface IAppConfig extends IConfig {
   nodeEnv: string;
   port: number;
   name: string;
+  basePath: string;
 }
 
 export class AppConfigProvider implements IConfigProvider {
@@ -17,6 +18,7 @@ export class AppConfigProvider implements IConfigProvider {
       nodeEnv: process.env.NODE_ENV || 'development',
       port: Number.parseInt(process.env.PORT, 10) || 3000,
       name: process.env.APP_NAME || 'starter-kit',
+      basePath: process.env.APP_BASEPATH || 'api',
     });
 
     if (error) {
@@ -35,6 +37,7 @@ export class AppConfigProvider implements IConfigProvider {
       nodeEnv: Joi.string().valid('development', 'production', 'test', 'stage').default('development'),
       port: Joi.number().default(3000),
       name: Joi.string(),
+      basePath: Joi.string(),
     });
   }
 

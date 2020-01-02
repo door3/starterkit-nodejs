@@ -5,6 +5,7 @@ import { ConfigService } from './common/services/config.service';
 import { LogService } from './common/services/log.service';
 import { LoggerMiddleware } from './common/middleware/logging';
 import { DataModule } from './modules/Data/data.module';
+import { SwaggerService } from './common/services/swagger.service';
 
 @Global()
 @Module({
@@ -16,6 +17,7 @@ import { DataModule } from './modules/Data/data.module';
     LogService,
     ConfigService,
     AppService,
+    SwaggerService,
   ],
   exports: [
     ConfigService,

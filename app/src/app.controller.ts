@@ -1,7 +1,8 @@
-import { Controller, Get, Inject, Post, Query, Body } from '@nestjs/common';
+import { Controller, Get, Inject, Post, Query, Body, HttpException } from '@nestjs/common';
 import { AppService } from './common/services/app.service';
 import { LogService } from './common/services/log.service';
 import { UserDto } from './common/dto/User.dto';
+import { ApiResponse } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
@@ -18,14 +19,22 @@ export class AppController {
   }
 
   @Post('user')
-  postUser(@Body() user: UserDto) {
+  @ApiResponse({ status: 201, description: 'User record created successfully.'})
+  @ApiResponse({ status: 400, description: 'User not created'})
+  async postUser(@Body() user: UserDto) {
 
     this.logger.log('postUser', 'AppController');
     this.logger.log(JSON.stringify(user), 'AppController');
-    return this.appService.createUser({
+    const success = await this.appService.createUser({
       ...user,
       isActive: false,
     });
+
+    if (!success) {
+      throw new HttpException('Error creating user', 400);
+    }
+
+    return success;
   }
 
 }
