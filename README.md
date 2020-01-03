@@ -26,6 +26,7 @@ This starter project comes preconfigured with the following features:
 * Typeorm for database objects and schema migrations
 * Configuration management
 * Logging
+* Swagger API documentation
 
 And more to come...
 
@@ -178,6 +179,43 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Swagger
+
+Swagger is preconfigured in this starter project. Once you have the application running you can navigate to http://localhost:3000/swagger to view the generated documentation. For more information on how Nestjs & swagger play together see [here](https://docs.nestjs.com/recipes/swagger).
+
+### Endpoint Documentation
+To add information about your API endpoints you can add `@ApiResponse()` decorator to your controller methods. This will allow you to add more information about your API's response codes.
+```typescript
+
+  @Post('user')
+  @ApiResponse({ status: 201, description: 'User record created successfully.'})
+  @ApiResponse({ status: 400, description: 'User not created'})
+  async postUser(@Body() user: UserDto) { }
+
+```
+
+### DTO Documentation
+
+To expose your DTO objects via swagger you must apply the `@ApiProperty()` decorator to the properties which you wish to expose.
+```typescript
+import { ApiProperty } from '@nestjs/swagger';
+
+export class UserDto {
+
+  @ApiProperty()
+  readonly email: string;
+
+  @ApiProperty()
+  readonly firstName: string;
+
+  @ApiProperty()
+  readonly lastName: string;
+
+  @ApiProperty()
+  readonly middleName: string;
+}
 ```
 
 ## Support
