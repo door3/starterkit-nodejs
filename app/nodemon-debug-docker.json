@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "npm run build && ENV_DIR=dist/src node --inspect-brk=0.0.0.0 ./dist/src/main.js"
+}

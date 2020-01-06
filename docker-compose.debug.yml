@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+
+  postgresdb:
+    image: postgres:11
+    volumes:
+      - ./database/postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=development
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+
+  mysqldb:
+    image: mysql:8
+    volumes:
+      - ./database/mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=development
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=adminpassword
+
+  mssqldb:
+    image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+    volumes:
+      - mssql-vol:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=p@ssword12345
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.debug
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    environment:
+      - ENV_DIR=./dist
+      - DB1_HOST=postgresdb
+      - DB1_TYPE=postgres
+      - DB1_DATABASE=development
+      - DB1_PORT=5432
+      - DB1_PASSWORD=adminpassword
+    depends_on:
+      - postgresdb
+      - mysqldb
+      - mssqldb
+
+volumes:
+  mssql-vol:
