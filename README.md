@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://door3.com/" target="blank">
-    <img src="https://www.door3.com/sites/all/themes/custom/door3/logo.png" />
+    <img src="./door3-logo.svg" />
   </a>
   <br/>
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="160" alt="Nest Logo" /></a>
